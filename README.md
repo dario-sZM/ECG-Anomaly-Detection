@@ -48,7 +48,7 @@ If we consider the averaged Time Series for each class below we notice the 'Norm
 ![](Images/Classes-AveragedTimeSeries.png)
 
 ## LSTM AUTOENCODER
-The autoencoder should take the input date (individual heartbeat), pass it through the model, and obtain a reconstructed version of the input as closely matched as possible. 
+The autoencoder should take the input data (individual heartbeat), pass it through the model, and obtain a reconstructed version of the input as closely matched as possible. 
 
 Using a low number of layers and parameters in the model will ensure a compressed representation of the data is used, providing a better chance of success. In other words, Autoencoders attempt to learn only the **most important features** (compressed) of the data. In this case, using a two layered LSTM we will capture the temporal dependenies of the data. 
 
@@ -98,6 +98,13 @@ The Autoencoder was able to determine **~99.5%** of the abnormal heartbeats.
 We can tweak the threshold depending on the kind of errors to tolerate - In this case, having more false positives (normal heartbeats considered as anomalies) than false negatives (anomalies considered as normal) might be advantageous.
 
 ### Visualizing the reconstructions
-By overlaying the real and reconstructed Time Series values we can see how similar they are. 
+By overlaying the real and reconstructed Time Series values we can see how similar they are. We will select just the first 6 tensors from the Normal and Anomaly tests:
 
 ![](Images/Overlay-Losses.png)
+
+## Summary
+While the Time Series data is univariate (only 1 feature), the code should work for multivariate datasets (multiple features) with little or no modification.
+
+## References
+https://github.com/shobrook/sequitur
+https://towardsdatascience.com/lstm-autoencoder-for-anomaly-detection-e1f4f2ee7ccf
