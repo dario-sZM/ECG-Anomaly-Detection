@@ -33,19 +33,19 @@ The dataset contains 5 types (classes) of heartbeat:
 ## Exploratory Data Analysis
 The 5000 examples are split across the 5 classes as follows:
 
-Normal          2919
-R on T           1767
-SP or EB       194
-PVC               96
-UB                 24
+Normal ........ 2919 <br>
+R on T .......... 1767 <br>
+SP or EB ...... 194 <br>
+PVC ............. 96 <br>
+UB ............... 24 <br> 
 
-// INSERT SPREAD BAR CHART HERE //
+![](Images/Count-HB-Classes.png)
 
 The Autoencoder will be trained using the **Normal** ECG signals. 
 
 If we consider the averaged Time Series for each class below we notice the 'Normal' class has a distinctly different pattern which should prove extremely useful when trying to detect anomalies. 
 
-// INSERT AVERAGED TIME SERIES CLASSES CHART HERE //
+![](Images/Classes-AveragedTimeSeries.png)
 
 ## LSTM AUTOENCODER
 The autoencoder should take the input date (individual heartbeat), pass it through the model, and obtain a reconstructed version of the input as closely matched as possible. 
@@ -66,13 +66,13 @@ Model trained using 85% of the 'Normal' heartbeat data and tested with the remai
 | EPOCH: 50  | TRAIN LOSS: 15.61  | VAL LOSS: 15.49  | EXEC. TIME: 7.57 min  |
 ```
 
-// INSERT LOSS CHART HERE
+![](Images/Epoch-Losses.png)
 
 Once each sequence in the training dataset is classified as Normal, we can determine a threshold above which the heartbeat will be considered abnormal. 
 
     THHRESHOLD = 26
     
-// INSERT LOSS THRESHOLD CHART HERE //
+![](Images/Loss-Density.png)
 
 ### Evaluation
 Since we have a threshold, the task resembles a simple binary classification task. 
@@ -84,14 +84,14 @@ Using a completely seperate training dataset of 'Normal' heartbeats, we can dete
 
     Correct normal predictions: 209/219
 
-// INSERT PREDICTION CHART - NORMAL //
+![](Images/PredictionLossDensity-Normal.png)
 
 #### Anomalies
 Repeating the process again however with a test dataset of anomalies:
 
     Correct anomaly predictions: 218/219
 
-// INSERT PREDICTION CHART - ANOMALY //
+![](Images/PredictionLossDensity-Anomaly.png)
 
 **Fantastic results!**
 The Autoencoder was able to determine **~99.5%** of the abnormal heartbeats. 
@@ -100,4 +100,4 @@ We can tweak the threshold depending on the kind of errors to tolerate - In this
 ### Visualizing the reconstructions
 By overlaying the real and reconstructed Time Series values we can see how similar they are. 
 
-// INSERT OVERLAY CHART HERE //
+![](Images/Overlay-Losses.png)
